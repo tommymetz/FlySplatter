@@ -1,0 +1,18 @@
+{
+  "name": "flysplatter",
+  "version": "1.0.0",
+  "author": "Tom Metz Media LLC",
+  "description": "Splatter those pesky flies you hate so much in the Fly Splatter game!!!",
+  "homepage": "http://www.flysplatter.com",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tmm/flysplatter"
+  },
+  "license":"MIT",
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-watch": "*"
+  }
+}

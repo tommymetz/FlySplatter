@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Fly Splatter | The Online Fly Squisher Game!</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="description" content="Splatter those pesky flies you hate so much in the Fly Splatter game!!!" />
+<meta name="abstract" content="Splatter those pesky flies you hate so much in the Fly Splatter game!!!" />
+<meta name="keywords" content="fly, flies, splat, splatter, swatter, fly swatter, game, kids game, squish" />
+<link rel="image_src" href="" />
+<link rel="canonical" href="http://www.flysplatter.com/" />
+<link rel="shortlink" href="http://www.flysplatter.com/" />
+<meta property="og:title" content="Fly Splatter | The Online Fly Squisher Game!" />
+<meta property="og:description" content="Splatter those pesky flies you hate so much in the Fly Splatter game!!!" />
+<meta property="og:image" content="http://www.flysplatter.com/flysplatter.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Fly Splatter" />
+<meta property="og:url" content="http://www.flysplatter.com" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@flysplatter" />
+<meta name="twitter:title" content="Fly Splatter | The Online Fly Squisher Game!" />
+<meta name="twitter:description" content="Splatter those pesky flies you hate so much in the Fly Splatter game!!!" />
+<meta name="twitter:image" content="http://www.flysplatter.com/flysplatter.jpg" />
+<meta name="twitter:url" content="http://www.flysplatter.com" />
+<link href="flysplatter.css" rel="stylesheet" type="text/css">
+<script src="flysplatter/dist/js/flysplatter.min.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-63167804-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</head>
+<body>
+
+<img src="logo.png" id="logo" />
+
+<div id="flycontainer"></div>
+<script>
+	var flies = new Flies(3, {
+    id:'flies', //html/css namespace
+		assetlocation:'flysplatter', //absolute url where the image and audio files live. Leave blank if in current folder '.'
+		containerid: 'flycontainer', //The container that the flies live in
+		startpause: 1000, //Time it takes to for a new fly to appear. This is added to a random number to give it variation
+		//mute: true, //Default is false,
+		score: true, //Default is false
+	});
+</script>
+</body>
+</html>

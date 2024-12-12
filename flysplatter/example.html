@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+</head>
+<body>
+
+<div id="flycontainer"><div>
+<script src="../flysplatter/dist/js/flysplatter.min.js"></script>
+<script>
+	var flies = new Flies(3, {
+		id:'flies', //html/css namespace
+		assetlocation:'.', //absolute url where the image and audio files live. Leave blank if in current folder '.'
+		containerid: 'flycontainer', //The container that the flies live in
+		startpause: 1000, //Time it takes to for a new fly to appear. This is added to a random number to give it variation
+		mute: true, //Default is false,
+		score: true, //Default is false
+	});
+</script>
+
+</body>
+</html>
