@@ -1,5 +1,7 @@
 # FlySplatter
 
+> ⚠️ **Note:** This is a legacy codebase that is out of date. It uses older JavaScript patterns and build tools. See the [Copilot instructions](.github/copilot-instructions.md) for refactoring guidance.
+
 Splatter those pesky flies you hate so much in the Fly Splatter game!
 
 ## 🎮 Play Now
