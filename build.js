@@ -9,6 +9,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const inputFile = path.join(__dirname, 'flysplatter/assets/js/flysplatter.js');
 const outputFile = path.join(__dirname, 'flysplatter/dist/js/flysplatter.min.js');
 
+// Global variable names that must be preserved during minification
+// These are exposed as public API for external projects
+const RESERVED_NAMES = ['Flies', 'Fly', 'iOS', 'score', 'debug', 'docReady', 'trackEvent'];
+
 async function build() {
   try {
     console.log('Reading source file...');
@@ -21,8 +25,7 @@ async function build() {
         drop_debugger: true
       },
       mangle: {
-        // Preserve important global names
-        reserved: ['Flies', 'Fly', 'iOS', 'score', 'debug', 'docReady', 'trackEvent']
+        reserved: RESERVED_NAMES
       },
       format: {
         comments: false
