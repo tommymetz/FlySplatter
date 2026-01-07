@@ -15,7 +15,7 @@ var Flies = function(count, properties){
 	this.score = properties.score || false;
 
 	//CREATE FLIES
-	for(i=0; i<this.flies.length; i++){
+	for(var i=0; i<this.flies.length; i++){
 		this.flies[i] = new Fly({
 			id:this.id + i,
 			assetlocation:this.assetlocation,
@@ -156,7 +156,7 @@ var Fly = function(model){
 	//FLY AUDIO
 	this.flyaudio = document.createElement('audio');
 	this.flyaudio.id = model.id + '_flyaudio';
-	this.flyaudio.innerHTML = '<source src="'+this.assetlocation+'/dist/audio/fly.ogg" type="audio/ogg"><source src="'+this.assetlocation+'/dist/audio/fly.mp3" type="audio/mpeg">';
+	this.flyaudio.innerHTML = '<source src="'+this.assetlocation+'/audio/fly.ogg" type="audio/ogg"><source src="'+this.assetlocation+'/audio/fly.mp3" type="audio/mpeg">';
 	if(this.containerid != 'body'){
 		document.getElementById(this.containerid).appendChild(this.flyaudio);
 	}else{
@@ -166,7 +166,7 @@ var Fly = function(model){
 	//FLY SPLAT AUDIO
 	this.flysplataudio = document.createElement('audio');
 	this.flysplataudio.id = model.id + '_flysplataudio';
-	this.flysplataudio.innerHTML = '<source src="'+this.assetlocation+'/dist/audio/splat.ogg" type="audio/ogg"><source src="'+this.assetlocation+'/dist/audio/splat.mp3" type="audio/mpeg">';
+	this.flysplataudio.innerHTML = '<source src="'+this.assetlocation+'/audio/splat.ogg" type="audio/ogg"><source src="'+this.assetlocation+'/audio/splat.mp3" type="audio/mpeg">';
 	if(this.containerid != 'body'){
 		document.getElementById(this.containerid).appendChild(this.flysplataudio);
 	}else{
@@ -186,17 +186,17 @@ var Fly = function(model){
 	this.preloadcount = 0;
 	var mythis = this;
 	docReady(function(){
-		mythis.flyimg.src = mythis.assetlocation + '/dist/img/fly.png';
+		mythis.flyimg.src = mythis.assetlocation + '/img/fly.png';
 		mythis.flyimg.onload = mythis.preloaded();
-		mythis.flysplatimg.src = mythis.assetlocation + '/dist/img/flysplat.png';
+		mythis.flysplatimg.src = mythis.assetlocation + '/img/flysplat.png';
 		mythis.flysplatimg.onload = mythis.preloaded();
-		mythis.flyaudiomp3.src = mythis.assetlocation+'/dist/audio/fly.mp3';
+		mythis.flyaudiomp3.src = mythis.assetlocation+'/audio/fly.mp3';
 		mythis.flyaudiomp3.addEventListener('canplaythrough', mythis.preloaded(), false);
-		mythis.flyaudioogg.src = mythis.assetlocation+'/dist/audio/fly.ogg';
+		mythis.flyaudioogg.src = mythis.assetlocation+'/audio/fly.ogg';
 		mythis.flyaudioogg.addEventListener('canplaythrough', mythis.preloaded(), false);
-		mythis.flysplatmp3.src = mythis.assetlocation+'/dist/audio/splat.mp3';
+		mythis.flysplatmp3.src = mythis.assetlocation+'/audio/splat.mp3';
 		mythis.flysplatmp3.addEventListener('canplaythrough', mythis.preloaded(), false);
-		mythis.flysplatogg.src = mythis.assetlocation+'/dist/audio/splat.ogg';
+		mythis.flysplatogg.src = mythis.assetlocation+'/audio/splat.ogg';
 		mythis.flysplatogg.addEventListener('canplaythrough', mythis.preloaded(), false);
 	});
 
@@ -685,3 +685,13 @@ function trackEvent(action, label){
 	//ga('send', 'event', 'FlySplatter', action, label);
 	//console.log('ga: ' + action + ' ' + label);
 }
+
+// Make Flies and Fly available as globals for backward compatibility
+if (typeof window !== 'undefined') {
+	window.Flies = Flies;
+	window.Fly = Fly;
+}
+
+// Export for ES modules
+export { Flies, Fly };
+export default Flies;

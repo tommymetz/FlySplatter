@@ -1,0 +1,36 @@
+{
+  "name": "flysplatter",
+  "version": "2.0.0",
+  "description": "Splatter those pesky flies you hate so much in the Fly Splatter game!!!",
+  "type": "module",
+  "main": "dist/flysplatter.js",
+  "module": "dist/flysplatter.js",
+  "types": "dist/flysplatter.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "fly",
+    "flies",
+    "splat",
+    "splatter",
+    "swatter",
+    "game"
+  ],
+  "author": "Tom Metz Media LLC",
+  "license": "MIT",
+  "homepage": "http://www.flysplatter.com",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tommymetz/flysplatter"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}

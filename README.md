@@ -1,7 +1,5 @@
 # FlySplatter
 
-> ⚠️ **Note:** This is a legacy codebase that is out of date. It uses older JavaScript patterns and build tools. See the [Copilot instructions](.github/copilot-instructions.md) for refactoring guidance.
-
 Splatter those pesky flies you hate so much in the Fly Splatter game!
 
 ## 🎮 Play Now
@@ -22,41 +20,58 @@ FlySplatter is an interactive browser-based game where players click or tap on f
 
 ```
 FlySplatter/
-├── index.html              # Main game page
-├── flysplatter.css         # Game styling
-├── flysplatter/            # Core game library
-│   ├── assets/             # Source assets
-│   │   ├── js/             # Source JavaScript
-│   │   ├── img/            # Image sprites
-│   │   └── audio/          # Sound effects
-│   ├── dist/               # Compiled/minified assets
-│   │   ├── js/             # Minified JavaScript
-│   │   ├── img/            # Optimized images
-│   │   └── audio/          # Audio files
-│   ├── gruntfile.js        # Build configuration
-│   └── package.json        # Dependencies
-├── bg-001-*.jpg            # Background images (large, medium, small)
-├── logo.png                # Game logo
-└── favicon.ico             # Site favicon
+├── src/                    # Source files
+│   ├── index.js            # Main entry point
+│   ├── flysplatter.js      # Core game logic
+│   └── assets/             # Game assets
+│       ├── img/            # Image sprites
+│       └── audio/          # Sound effects
+├── public/                 # Static files for demo site
+│   ├── index.html          # Demo page
+│   ├── flysplatter.css     # Game styling
+│   ├── bg-001-*.jpg        # Background images
+│   ├── logo.png            # Game logo
+│   └── favicon.ico         # Site favicon
+├── dist/                   # Built files (generated)
+│   ├── flysplatter.js      # UMD build
+│   └── flysplatter.es.js   # ES module build
+├── vite.config.js          # Vite configuration
+└── package.json            # Dependencies and scripts
 ```
 
 ## Usage
 
-Include the minified JavaScript file and initialize the game:
+### Browser (UMD)
+
+Include the built JavaScript file and initialize the game:
 
 ```html
 <div id="flycontainer"></div>
-<script src="flysplatter/dist/js/flysplatter.min.js"></script>
+<script src="dist/flysplatter.js"></script>
 <script>
   var flies = new Flies(3, {
     id: 'flies',                    // HTML/CSS namespace
-    assetlocation: 'flysplatter',   // Path to assets folder
+    assetlocation: '/src/assets',   // Path to assets folder
     containerid: 'flycontainer',    // Container element ID
     startpause: 1000,               // Delay before new fly appears (ms)
     mute: false,                    // Mute audio (default: false)
     score: true                     // Show scoreboard (default: false)
   });
 </script>
+```
+
+### ES Module
+
+```javascript
+import Flies from 'flysplatter';
+
+const flies = new Flies(3, {
+  id: 'flies',
+  assetlocation: '/src/assets',
+  containerid: 'flycontainer',
+  startpause: 1000,
+  score: true
+});
 ```
 
 ### Options
@@ -72,14 +87,16 @@ Include the minified JavaScript file and initialize the game:
 
 ## Development
 
-The game uses Grunt for building. To set up the development environment:
+The game uses Vite for building and development. To set up the development environment:
 
 ```bash
-cd flysplatter
-npm install
-grunt        # Build once
-grunt watch  # Watch for changes
+npm install          # Install dependencies
+npm run dev          # Start development server with hot reload
+npm run build        # Build for production
+npm run preview      # Preview production build
 ```
+
+The development server will start at `http://localhost:3000` with hot module replacement enabled.
 
 ## License
 
