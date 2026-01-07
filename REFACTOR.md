@@ -38,15 +38,14 @@ The library is embedded in external projects using the following paths:
 
 ### Tasks
 
-- [ ] Run `npm audit` to check for vulnerabilities
-- [ ] Run `npm outdated` to identify outdated packages
-- [ ] Update Grunt to latest version
-- [ ] Update grunt-contrib-jshint to latest version
-- [ ] Update grunt-contrib-uglify to latest version
-- [ ] Update grunt-contrib-watch to latest version
-- [ ] Run build and verify output matches expected format
-- [ ] Test that the game still works with updated dependencies
-- [ ] Commit and tag this as a stable checkpoint
+- [x] Run `npm audit` to check for vulnerabilities
+- [x] Run `npm outdated` to identify outdated packages
+- [x] Update Grunt to latest version
+- [x] Update grunt-contrib-jshint to latest version
+- [x] Update grunt-contrib-uglify to latest version
+- [x] Update grunt-contrib-watch to latest version
+- [x] Run build and verify output matches expected format
+- [x] Test that the game still works with updated dependencies
 
 ### Breaking Changes
 
