@@ -187,7 +187,7 @@ npm run preview      # Preview production build
 ### Tasks
 
 - [ ] Create `src/Flies.js` with the Flies class
-- [ ] Create `src/Fly.js` with the Fly class  
+- [ ] Create `src/Fly.js` with the Fly class
 - [ ] Update `src/index.js` to import and export classes
 - [ ] Add named exports: `export { Flies, Fly }`
 - [ ] Add default export: `export default Flies`
