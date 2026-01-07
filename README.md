@@ -72,14 +72,21 @@ Include the minified JavaScript file and initialize the game:
 
 ## Development
 
-The game uses Grunt for building. To set up the development environment:
+The game uses Vite for development and Terser for building. To set up the development environment:
 
 ```bash
-cd flysplatter
-npm install
-grunt        # Build once
-grunt watch  # Watch for changes
+npm install          # Install dependencies at root level
+npm run dev          # Start development server with hot reload
+npm run build        # Build for production (minifies to flysplatter/dist/js/)
+npm run preview      # Preview production build locally
 ```
+
+### Build Output
+
+The build process outputs to:
+- **JavaScript**: `flysplatter/dist/js/flysplatter.min.js` (minified)
+- **Images**: `flysplatter/dist/img/` (already in place)
+- **Audio**: `flysplatter/dist/audio/` (already in place)
 
 ## License
 
