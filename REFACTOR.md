@@ -128,7 +128,7 @@ FlySplatter/
 
 2. **CDN/Direct Script**: Use the new dist path
    ```html
-   <script src="https://your-cdn.com/flysplatter/dist/flysplatter.min.js"></script>
+   <script src="https://your-cdn.com/dist/flysplatter.min.js"></script>
    ```
 
 ### New Build Commands
@@ -175,7 +175,7 @@ npm run preview      # Preview production build
 
 ## Step 3: Add ES Modules Support
 
-**Goal**: Enable ES modules for better code organization. With the Vite migration already completed, this step involves splitting the monolithic file into proper modules.
+**Goal**: Enable ES modules for better code organization. Building on the Vite structure established in Step 1, this step involves splitting the monolithic file into proper modules.
 
 ### Changes Required
 
