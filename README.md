@@ -1,90 +1,61 @@
 # FlySplatter
 
-> ⚠️ **Note:** This is a legacy codebase that is out of date. It uses older JavaScript patterns and build tools. See the [Copilot instructions](.github/copilot-instructions.md) for refactoring guidance.
-
 Splatter those pesky flies you hate so much in the Fly Splatter game!
 
-## 🎮 Play Now
+**[Play FlySplatter](https://flysplatter.netlify.app)**
 
-**[Play FlySplatter Live](https://flysplatter.netlify.app)**
+Flies buzz in, land, rub their arms, twitch their wings, walk around, and fly off. Click or tap one to splat it.
 
-## About
+## Use it in a React project
 
-FlySplatter is an interactive browser-based game where players click or tap on flies to splat them. The game features:
-
-- Animated flies that fly in, land, and perform various actions (wing twitching, hand rubbing, walking)
-- Sound effects for flying and splatting
-- Score tracking
-- Responsive design with different background images for various screen sizes
-- Touch support for mobile devices
-
-## Project Structure
-
-```
-FlySplatter/
-├── index.html              # Main game page
-├── flysplatter.css         # Game styling
-├── flysplatter/            # Core game library
-│   ├── assets/             # Source assets
-│   │   ├── js/             # Source JavaScript
-│   │   ├── img/            # Image sprites
-│   │   └── audio/          # Sound effects
-│   ├── dist/               # Compiled/minified assets
-│   │   ├── js/             # Minified JavaScript
-│   │   ├── img/            # Optimized images
-│   │   └── audio/          # Audio files
-│   ├── gruntfile.js        # Build configuration
-│   └── package.json        # Dependencies
-├── bg-001-*.jpg            # Background images (large, medium, small)
-├── logo.png                # Game logo
-└── favicon.ico             # Site favicon
+```bash
+npm i github:tommymetz/flysplatter#v2.0.0
 ```
 
-## Usage
+```tsx
+import { FlySplatter } from 'flysplatter'
 
-Include the minified JavaScript file and initialize the game:
-
-```html
-<div id="flycontainer"></div>
-<script src="flysplatter/dist/js/flysplatter.min.js"></script>
-<script>
-  var flies = new Flies(3, {
-    id: 'flies',                    // HTML/CSS namespace
-    assetlocation: 'flysplatter',   // Path to assets folder
-    containerid: 'flycontainer',    // Container element ID
-    startpause: 1000,               // Delay before new fly appears (ms)
-    mute: false,                    // Mute audio (default: false)
-    score: true                     // Show scoreboard (default: false)
-  });
-</script>
+export function App() {
+  return (
+    <>
+      <FlySplatter anchor="page" muted initialDelay={2000} />
+      {/* ...your app */}
+    </>
+  )
+}
 ```
 
-### Options
+The component portals its flies into `document.body`, so it can go anywhere in the tree. It is SSR-safe and doesn't block clicks on the page underneath.
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `id` | string | `'fly'` | HTML/CSS namespace for elements |
-| `assetlocation` | string | `'.'` | Path to the flysplatter assets folder |
-| `containerid` | string | `'body'` | ID of the container element |
-| `startpause` | number | `5000` | Milliseconds before a new fly appears |
-| `mute` | boolean | `false` | Whether to mute sound effects |
-| `score` | boolean | `false` | Whether to display the scoreboard |
+| Prop | Default | |
+| --- | --- | --- |
+| `count` | `1` | Number of flies |
+| `anchor` | `'viewport'` | `'viewport'`: flies are fixed on screen. `'page'`: landed flies and splats scroll with the page |
+| `muted` | `false` | Toggling it doesn't reset the flies |
+| `initialDelay` | `0` | ms before the first flies appear |
+| `spawnDelay` | `5000` | ms, plus up to 1s of random time, before a fly returns |
+| `zIndex` | `1000` | |
+| `showScore` | `false` | Built-in scoreboard in the top-left corner |
+| `respectReducedMotion` | `true` | Show no flies when the user prefers reduced motion |
+| `onSplat` | | `(score) => void`, for rendering your own scoreboard |
+
+### Legacy script embed
+
+The original v1 build is still served at `/flysplatter/dist/js/flysplatter.min.js`, along with its `img/` and `audio/` folders, so existing `new Flies(...)` embeds keep working. It's frozen and won't get updates. Switch to the component when you can.
 
 ## Development
 
-The game uses Grunt for building. To set up the development environment:
-
 ```bash
-cd flysplatter
 npm install
-grunt        # Build once
-grunt watch  # Watch for changes
+npm run dev        # the game at http://localhost:5173 (?anchor=page for a scroll test)
+npm test
+npm run lint
+npm run build      # game site → dist/site
+npm run build:lib  # package → dist/lib
 ```
+
+See [AGENTS.md](AGENTS.md) for architecture notes.
 
 ## License
 
-MIT
-
-## Author
-
-Tom Metz Media LLC
+MIT © Tom Metz Media LLC
