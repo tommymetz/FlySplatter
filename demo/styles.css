@@ -65,3 +65,11 @@ body {
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+.version {
+  position: fixed;
+  right: 8px;
+  bottom: 6px;
+  font-size: 11px;
+  color: rgb(0 0 0 / 0.6);
+}

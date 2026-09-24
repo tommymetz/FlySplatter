@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { FlySplatter, type Anchor } from '../src'
+import { version } from '../package.json'
 
 // ?anchor=page adds a long page to test flies that scroll with the content
 const anchor: Anchor = new URLSearchParams(location.search).get('anchor') === 'page' ? 'page' : 'viewport'
@@ -22,6 +23,7 @@ export function App() {
             ))}
           </div>
         )}
+        <small className="version">v{version}</small>
       </main>
       <FlySplatter count={3} anchor={anchor} spawnDelay={1000} muted={muted} showScore respectReducedMotion={false} />
     </>
