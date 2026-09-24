@@ -9,7 +9,7 @@ Flies buzz in, land, rub their arms, twitch their wings, walk around, and fly of
 ## Use it in a React project
 
 ```bash
-npm i github:tommymetz/flysplatter#v2.0.0
+npm i github:tommymetz/flysplatter#v2.0.1
 ```
 
 ```tsx
@@ -25,12 +25,13 @@ export function App() {
 }
 ```
 
-The component portals its flies into `document.body`, so it can go anywhere in the tree. It is SSR-safe and doesn't block clicks on the page underneath.
+The component portals its flies into `document.body` (or into `scrollContainer`), so it can go anywhere in the tree. It is SSR-safe and doesn't block clicks on the page underneath.
 
 | Prop | Default | |
 | --- | --- | --- |
 | `count` | `1` | Number of flies |
 | `anchor` | `'viewport'` | `'viewport'`: flies are fixed on screen. `'page'`: landed flies and splats scroll with the page |
+| `scrollContainer` | | A ref to the element that scrolls, if your app scrolls inside an element instead of the document. Needed for `anchor="page"` in that setup. A static element gets `position: relative` |
 | `muted` | `false` | Toggling it doesn't reset the flies |
 | `initialDelay` | `0` | ms before the first flies appear |
 | `spawnDelay` | `5000` | ms, plus up to 1s of random time, before a fly returns |

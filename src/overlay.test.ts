@@ -22,11 +22,30 @@ describe('visibleBounds', () => {
   })
 })
 
+describe('visibleBounds with a scroll container', () => {
+  it("is the scroller's inner box, offset by how far its content has scrolled", () => {
+    const scroller = document.createElement('div')
+    vi.spyOn(scroller, 'getBoundingClientRect').mockReturnValue({ left: 0, top: 60 } as DOMRect)
+    vi.spyOn(scroller, 'clientWidth', 'get').mockReturnValue(800)
+    vi.spyOn(scroller, 'clientHeight', 'get').mockReturnValue(540)
+    // Scrolled 1000px: overlay top is 1000px above the scroller's top edge
+    expect(visibleBounds(overlayAt(0, 60 - 1000), scroller)).toEqual({ left: 0, top: 1000, width: 800, height: 540 })
+  })
+})
+
 describe('sizeToPage', () => {
   it('uses the scrollable height, not the (100%) body height', () => {
     const overlay = document.createElement('div')
     vi.spyOn(document.documentElement, 'scrollHeight', 'get').mockReturnValue(4200)
     sizeToPage(overlay)
     expect(overlay.style.height).toBe('4200px')
+  })
+
+  it("uses the scroller's scrollable height when given one", () => {
+    const overlay = document.createElement('div')
+    const scroller = document.createElement('div')
+    vi.spyOn(scroller, 'scrollHeight', 'get').mockReturnValue(9000)
+    sizeToPage(overlay, scroller)
+    expect(overlay.style.height).toBe('9000px')
   })
 })

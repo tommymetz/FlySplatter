@@ -1,4 +1,5 @@
 import { act, fireEvent, render, screen } from '@testing-library/react'
+import { useRef } from 'react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { FlySplatter } from './FlySplatter'
 
@@ -24,7 +25,7 @@ function land() {
 describe('<FlySplatter>', () => {
   it('portals an overlay into body and removes it on unmount', () => {
     const { unmount } = render(<FlySplatter count={2} />)
-    expect(overlay()?.parentElement).toBe(document.body)
+    expect(overlay()?.parentElement?.parentElement).toBe(document.body)
     expect(screen.getAllByTestId('fly')).toHaveLength(2)
     unmount()
     expect(overlay()).toBeNull()
@@ -35,6 +36,38 @@ describe('<FlySplatter>', () => {
     expect((overlay() as HTMLElement).style.position).toBe('fixed')
     rerender(<FlySplatter anchor="page" />)
     expect((overlay() as HTMLElement).style.position).toBe('absolute')
+  })
+
+  it('lives inside a scroll container when given one, and restores its position style', () => {
+    function Host({ fly = true }) {
+      const ref = useRef<HTMLDivElement>(null)
+      return (
+        <div ref={ref} id="scroller">
+          {fly && <FlySplatter anchor="page" scrollContainer={ref} />}
+        </div>
+      )
+    }
+    const { rerender } = render(<Host />)
+    const scroller = document.getElementById('scroller')!
+    expect(scroller.contains(overlay())).toBe(true)
+    expect(scroller.style.position).toBe('relative')
+
+    rerender(<Host fly={false} />)
+    expect(overlay()).toBeNull()
+    expect(scroller.style.position).toBe('')
+  })
+
+  it('ignores scrollContainer for viewport anchoring', () => {
+    function Host() {
+      const ref = useRef<HTMLDivElement>(null)
+      return (
+        <div ref={ref} id="scroller">
+          <FlySplatter scrollContainer={ref} />
+        </div>
+      )
+    }
+    render(<Host />)
+    expect(document.getElementById('scroller')!.contains(overlay())).toBe(false)
   })
 
   it('ignores clicks until landed, then splats, scores and respawns', () => {

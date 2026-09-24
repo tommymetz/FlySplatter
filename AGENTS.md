@@ -13,7 +13,7 @@ Behavior and view are deliberately separate so the 2D sprite view can later be s
 - `src/Fly.tsx`: 2D canvas view of one fly. It runs `stepFly` in `useAnimationFrame` and mutates the canvas transform and drawing through refs. **Per-frame motion never goes through React state.**
 - `src/Splat.tsx`: a canvas that draws a splat once.
 - `src/FlySplatter.tsx`: the public component. It portals an overlay into `document.body` and owns the score and splat list, which are the only React state.
-- `src/overlay.ts`: anchor modes. `viewport` uses a fixed overlay. `page` uses an absolute overlay sized to the document, so flies scroll with the page. `visibleBounds()` converts the visible viewport into overlay-local coordinates and is used for spawning, targets, walk clamping and exits.
+- `src/overlay.ts`: anchor modes. For `page`, the overlay goes in `scrollContainer` if one is given (apps that scroll an inner element, not the document), otherwise in `body`. `viewport` uses a fixed overlay. `page` uses an absolute overlay sized to the document, so flies scroll with the page. `visibleBounds()` converts the visible viewport into overlay-local coordinates and is used for spawning, targets, walk clamping and exits.
 - `src/sprites.ts`: DPR canvas setup and sprite drawing. There are 6 fly frames at 50×60 and 5 splat variants at 100×100. Rotation is in canvas space, so the shadow stays bottom-right.
 - `src/useFlyAudio.ts`: per-fly buzz (fade-in) and splat sounds, created lazily only when not muted.
 - `src/random.ts`: seedable RNG for deterministic tests.
