@@ -1,0 +1,67 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #d3d3d3 url(/bg-001-l.jpg) center / cover fixed;
+  font-family: system-ui, sans-serif;
+}
+
+@media (max-width: 1000px) {
+  body {
+    background-image: url(/bg-001-m.jpg);
+  }
+}
+
+@media (max-width: 500px) {
+  body {
+    background-image: url(/bg-001-s.jpg);
+  }
+}
+
+.logo {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 200px;
+  height: 86px;
+}
+
+.mute {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 2000;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 4px;
+  background: #000;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.mute:focus-visible {
+  outline: 3px solid #fc0;
+  outline-offset: 2px;
+}
+
+.scroll-test {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 4rem 1rem 8rem;
+  font-size: 1.25rem;
+  line-height: 3;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
