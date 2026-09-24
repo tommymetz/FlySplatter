@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react'
-import splatPng from './assets/flysplat.png'
-import { SPLAT_BOX, drawSplat, getImage, setupCanvas } from './sprites'
+import { SPLAT_BOX, drawSplat, getSplatImage, setupCanvas } from './sprites'
 
 export interface SplatData {
   id: number
@@ -17,7 +16,7 @@ export function Splat({ x, y, angle, variant }: SplatData) {
   useEffect(() => {
     const ctx = canvasRef.current && setupCanvas(canvasRef.current, SPLAT_BOX)
     if (!ctx) return
-    const img = getImage(splatPng)
+    const img = getSplatImage()
     const draw = () => drawSplat(ctx, img, variant, angle)
     if (img.complete) draw()
     else img.addEventListener('load', draw, { once: true })

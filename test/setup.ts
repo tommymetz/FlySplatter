@@ -9,6 +9,7 @@ HTMLCanvasElement.prototype.getContext = vi.fn(
 ) as unknown as HTMLCanvasElement['getContext']
 HTMLMediaElement.prototype.play = vi.fn(() => Promise.resolve())
 HTMLMediaElement.prototype.pause = vi.fn()
+HTMLMediaElement.prototype.load = vi.fn()
 
 globalThis.ResizeObserver ??= class {
   observe() {}

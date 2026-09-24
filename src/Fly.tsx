@@ -1,5 +1,4 @@
 import { useEffect, useRef, type PointerEvent } from 'react'
-import flyPng from './assets/fly.png'
 import {
   FLY_BOX,
   createFly,
@@ -10,7 +9,7 @@ import {
   type Bounds,
   type FlyState,
 } from './flyMachine'
-import { drawFly, getImage, setupCanvas } from './sprites'
+import { drawFly, getFlyImage, getSplatImage, setupCanvas } from './sprites'
 import { useAnimationFrame } from './useAnimationFrame'
 import { useFlyAudio } from './useFlyAudio'
 
@@ -32,6 +31,7 @@ export function Fly({ getBounds, initialDelay, spawnDelay, muted, onSplat }: Fly
 
   useEffect(() => {
     if (canvasRef.current) ctxRef.current = setupCanvas(canvasRef.current, FLY_BOX)
+    getSplatImage() // preload so the first splat shows instantly
   }, [])
 
   function render(fly: FlyState) {
@@ -41,7 +41,7 @@ export function Fly({ getBounds, initialDelay, spawnDelay, muted, onSplat }: Fly
     canvas.style.visibility = fly.phase === 'waiting' ? 'hidden' : 'visible'
     canvas.style.transform = `translate3d(${fly.x}px, ${fly.y}px, 0)`
 
-    const img = getImage(flyPng)
+    const img = getFlyImage()
     const key = `${fly.frame}:${fly.angle}`
     if (ctx && img.complete && key !== drawnRef.current) {
       drawFly(ctx, img, fly.frame, fly.angle, FLY_BOX)

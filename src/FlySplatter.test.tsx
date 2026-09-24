@@ -8,6 +8,7 @@ beforeEach(() => {
 afterEach(() => {
   vi.useRealTimers()
   vi.mocked(HTMLMediaElement.prototype.play).mockClear()
+  vi.mocked(HTMLMediaElement.prototype.load).mockClear()
 })
 
 const overlay = () => document.body.querySelector('.flysplatter')
@@ -66,6 +67,14 @@ describe('<FlySplatter>', () => {
     expect(screen.getByTestId('fly')).toBe(fly)
     fireEvent.pointerDown(fly)
     expect(HTMLMediaElement.prototype.play).toHaveBeenCalled()
+  })
+
+  it('preloads sounds on mount only when unmuted', () => {
+    const { rerender } = render(<FlySplatter muted />)
+    expect(HTMLMediaElement.prototype.load).not.toHaveBeenCalled()
+    rerender(<FlySplatter />)
+    const sources = vi.mocked(HTMLMediaElement.prototype.load).mock.contexts.map((a) => (a as HTMLAudioElement).src)
+    expect(sources.some((src) => src.includes('splat'))).toBe(true)
   })
 
   it('shows no flies when the user prefers reduced motion', () => {

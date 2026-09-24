@@ -1,3 +1,5 @@
+import flyPng from './assets/fly.png'
+import splatPng from './assets/flysplat.png'
 import type { Frame } from './flyMachine'
 
 const FLY_FRAMES: Frame[] = [
@@ -62,12 +64,16 @@ export function drawSplat(ctx: CanvasRenderingContext2D, image: CanvasImageSourc
 const images = new Map<string, HTMLImageElement>()
 
 /** Shared, cached image; check `.complete` before drawing. */
-export function getImage(src: string) {
+function getImage(src: string) {
   let img = images.get(src)
   if (!img) {
     img = new Image()
     img.src = src
+    img.decode?.().catch(() => {}) // decode now, not on first draw
     images.set(src, img)
   }
   return img
 }
+
+export const getFlyImage = () => getImage(flyPng)
+export const getSplatImage = () => getImage(splatPng)
